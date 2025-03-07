@@ -1,0 +1,6 @@
+save.dat
+steam_autocloud.vdf
+save/*.txt
+custom/deleted
+custom/*.lua
+!custom/TIS100M-*.lua
