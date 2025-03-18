@@ -1,0 +1,63 @@
+@0
+   MOV 0 RIGHT
+   MOV 10 ACC
+A: SUB 1
+   JNZ A
+
+   MOV RIGHT DOWN
+
+>: MOV UP DOWN
+   JMP >
+
+@1
+MOV UP LEFT
+
+@2
+## SLIGHTLY BETTER
+
+@3
+   MOV UP RIGHT
+   MOV RIGHT NIL
+
+-4:MOV UP ACC
+-3:MOV ACC RIGHT
+   MOV ACC RIGHT
+   MOV RIGHT DOWN
+   JRO DOWN
+
+@4
+=: ADD LEFT
+   MOV 4 LEFT
+^: MOV ACC DOWN
+   MOV UP ACC
+   JNZ ^
+
+>: MOV ACC UP
+   MOV DOWN ACC
+   JEZ ^
+   SUB LEFT
+   JEZ =
+   ADD LEFT
+   MOV 1 LEFT
+   JMP >
+
+@5
+
+
+@6
+
+
+@7
+   MOV -10 ACC
+   JMP >
+
+^: MOV -3 UP
+>: JRO UP
+1: ADD 1
+   JNZ ^
+   MOV -11 ACC
+4: ADD 10
+   MOV ACC DOWN
+   MOV -4 UP
+
+@8

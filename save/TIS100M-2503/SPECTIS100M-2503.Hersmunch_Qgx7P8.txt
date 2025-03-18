@@ -1,0 +1,58 @@
+@0
+
+
+@1
+   MOV UP  ACC
+   MOV ACC DOWN
+   ADD ACC
+G: SUB 1
+   MOV ACC DOWN
+   SUB 1
+   MOV ACC DOWN
+   SUB 1
+   MOV ACC DOWN
+   SUB 1
+   MOV ACC DOWN
+   SUB 1
+   MOV ACC DOWN
+   JGZ G
+   MOV 800 DOWN
+
+@2
+
+
+@3
+
+
+@4
+   MOV UP  ACC
+E: SUB 100
+   JMP L
+L2:MOV   2 DOWN
+L: ADD UP
+   JLZ L
+   SUB 400
+   JLZ L2
+   SUB 200
+   JGZ G
+   MOV UP  ACC
+   MOV 998 DOWN
+   SUB 100
+   JMP L
+G: MOV 999 DOWN
+
+@5
+
+
+@6
+
+
+@7
+   MOV -999 ACC
+
+L: ADD UP
+   JLZ L
+
+   MOV ACC DOWN
+
+@8
