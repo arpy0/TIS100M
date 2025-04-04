@@ -1,4 +1,5 @@
 save.dat
+*.zip
 steam_autocloud.vdf
 save/*.txt
 custom/deleted
