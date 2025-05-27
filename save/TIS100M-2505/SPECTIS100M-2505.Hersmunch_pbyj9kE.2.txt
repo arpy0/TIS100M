@@ -1,0 +1,66 @@
+@0
+MOV RIGHT DOWN
+
+@1
+   MOV UP  ACC
+G: SUB 100
+   MOV   1 LEFT
+   JGZ G
+   JEZ G
+   MOV  99 LEFT
+
+L: ADD 10
+   MOV  -1 LEFT
+   JLZ L
+   MOV 110 LEFT
+
+   ADD 100
+   MOV ACC LEFT
+
+@2
+MOV UP RIGHT
+
+@3
+MOV LEFT RIGHT
+
+@4
+MOV LEFT RIGHT
+
+@5
+   MOV -100 ACC
+S: ADD LEFT
+   JLZ S
+
+   SUB 4
+   JGZ G
+L: ADD 5
+   MOV   1 DOWN
+   JMP E
+G: MOV   3 DOWN
+E: MOV ACC DOWN
+   NEG
+   ADD 6
+   MOV   3 DOWN
+   MOV ACC DOWN
+
+@6
+   MOV   0 DOWN
+   MOV ACC DOWN
+   SUB 599
+
+L: MOV RIGHT DOWN
+   JRO RIGHT
+   MOV   0 DOWN
+   MOV   0 DOWN
+   MOV   0 DOWN
+   MOV   0 DOWN
+   ADD 60
+   JLZ L
+
+   MOV  -1 DOWN
+
+@7
+MOV RIGHT LEFT
+
+@8
+MOV UP LEFT
