@@ -1,7 +1,12 @@
 save.dat
+__pycache__
 *.zip
 steam_autocloud.vdf
-save/*.txt
 custom/deleted
 custom/*.lua
 !custom/TIS100M-*.lua
+save/deleted
+save/*.txt
+sheets/from_tally
+lua51.dll
+TIS-100-CXX.exe
