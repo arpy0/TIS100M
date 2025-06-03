@@ -86,24 +86,48 @@ for sol in sols.iterdir():
 
 # %% generate_spreadsheet
 # This cell takes the scores from the simulation and puts it into a csv.
+
+import pandas as pd
+import pareto
+
+month = '2505'
+filename = f'TIS100M-{month}'
+
+table = pd.read_csv(f'sheets/processed/{filename}.csv')
+
 initial_cols = ['Name','C','N','P','I','O']
-N_cols = ['C','N','I']
-P_cols = ['C','P','I']
+sim_cols = ['C','N','I','O']
 
-scores_df = pd.DataFrame(columns=initial_cols)
-scores_df['Name'] = names
-scores_df[N_cols+['O']] = scores
-scores_df[N_cols+['O']] = scores_df[N_cols+['O']].astype(int)
-scores_df['P'] = p_scores
+table = table.rename(columns={'Cheated?':'O'})
+table['O'] = table['O'].replace(['Yes','Hard'],[1,2]).fillna(0).astype(int)
+table = table[initial_cols]
 
-scores_df['Pareto? (N)'] = pareto.check_pareto(scores_df[N_cols+['O']])
-scores_df['Pareto? (N)'] = scores_df['Pareto? (N)'].replace([False,True],['','Yes'])
-scores_df['Categories Won (N)'] = pareto.find_flagged_categories(scores_df[N_cols],scores_df['O'],{'':0,'c':1,'h':2})
+scores_df = table
 
-scores_df['Pareto? (P)'] = pareto.check_pareto(scores_df[P_cols+['O']])
-scores_df['Pareto? (P)'] = scores_df['Pareto? (P)'].replace([False,True],['','Yes'])
-scores_df['Categories Won (P)'] = pareto.find_flagged_categories(scores_df[P_cols],scores_df['O'],{'':0,'c':1,'h':2})
+# scores_df = pd.DataFrame(columns=initial_cols)
+# scores_df['Name'] = names
+# scores_df[sim_cols] = scores
+# scores_df[sim_cols] = scores_df[sim_cols].astype(int)
+# scores_df['P'] = p_scores
+scores_df['X'] = scores_df['C']*scores_df['I']
 
+for N in ['N','P']:
+    pareto_cols = ['C',f'{N}','I']
+
+    scores_df[f'pareto{N}'] = pareto.check_pareto(scores_df[pareto_cols+['O']])
+    scores_df[f'pareto{N}'] = scores_df[f'pareto{N}'].replace([False,True],['','*'])
+    scores_df[f'cats{N}'] = pareto.find_flagged_categories(scores_df[pareto_cols],scores_df['O'],{'':0,'c':1,'h':2})
+    scores_df[f'Records ({N})'] = scores_df[f'cats{N}'].str.split(',').apply(lambda x: ','.join([i for i in x if '(' not in i]))
+    scores_df[f'Categories ({N})'] = scores_df[f'cats{N}'].str.split(',').apply(lambda x: ','.join([i for i in x if '(' in i]))
+    scores_df.loc[scores_df[f'Categories ({N})']=='',f'Records ({N})'] += scores_df[f'pareto{N}']
+    scores_df.loc[scores_df[f'Categories ({N})']!='',f'Categories ({N})'] += scores_df[f'pareto{N}']
+    
+    scores_df = scores_df.drop(columns=[f'pareto{N}',f'cats{N}'])
+    
+for N in ['N','P']:
+    scores_df[f'prod{N}'] = pareto.find_flagged_category(scores_df[[f'{N}','X']],scores_df['O'],{'':0,'c':1,'h':2})
+
+scores_df = scores_df.drop(columns='X')
 scores_df['O'] = scores_df['O'].replace([0,1,2],['','Yes','Hard'])
 scores_df = scores_df.rename(columns={'O':'Cheated?'})
 

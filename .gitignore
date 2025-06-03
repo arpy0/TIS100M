@@ -1,5 +1,6 @@
 save.dat
 __pycache__
+.spyproject
 *.zip
 steam_autocloud.vdf
 custom/deleted

@@ -42,7 +42,7 @@ def find_frontiers(scores,formatted=True):
         frontiers = frontiers.apply(format_frontiers,axis=1)
     return frontiers
 
-def absorb(row,metrics=pd.Index(['A','B','C'])):
+def absorb(row):
     """
     This finds categories from the frontiers a solution is on.
     It has to "absorb" frontiers to determine categories.
@@ -66,7 +66,6 @@ def absorb(row,metrics=pd.Index(['A','B','C'])):
         return stories
     return pd.Series([tuple(cat) for cat in supers(items)])
 
-
 def trim(cats):
     """
     Categories sometimes include too much detail. 
@@ -87,6 +86,39 @@ def trim(cats):
     dedupe = dedupe.apply(lambda x: pd.Series(x.sort_values().values),axis=1)
     cats = dedupe.dropna(how='all',axis=1)
     return cats
+
+def find_category(scores,metrics=None,formatted=True):
+    """
+    Finds a category based on the given order of metrics.
+    If metrics is None, the column order is taken as given.
+    """
+    if metrics is None:
+        metrics = scores.columns
+    out = pd.Series(True,index=scores.index)
+    pareto = ''
+    for metric in metrics:
+        pareto += metric
+        paretos = check_pareto(scores[list(pareto)])
+        out.loc[out&~paretos] = False
+    if formatted:
+        out = out.replace([False,True],['',''.join(format_label(i) for i in metrics)])
+    return out
+
+def find_flagged_category(scores,flag_score,flags,metrics=None,formatted=True):
+    """
+    Finds a category based on the given order of metrics.
+    If metrics is None, the column order is taken as given.
+    """
+    out = pd.Series('',index=scores.index,dtype=str)
+    for ind,flag in enumerate(flags):
+        inds = flag_score<=ind
+        temp = pd.Series('',index=scores.index,dtype=str)
+        temp.loc[inds] = find_category(scores.loc[inds])
+        temp[temp!=''] = flag + temp[temp!='']
+        out.loc[out==''] += temp[out=='']
+        
+    return out.fillna('')
+
     
 format_cats = lambda x: ','.join([''.join(format_label(i) for i in j) for j in x if not pd.isna(j)])
 
@@ -125,7 +157,7 @@ def prune_flag_categories(higher,lower):
 
 format_flag_cats = lambda x,flag: ','.join([flag + ''.join(format_label(i) for i in j) for j in x if not pd.isna(j)])
 
-def find_flagged_categories(scores,flag_score,flags):
+def find_flagged_categories(scores,flag_score,flags,trimmed=True):
     """
     Flags applied to scores might put them in different categories.
     This function calculates categories with different flag levels and
@@ -145,7 +177,7 @@ def find_flagged_categories(scores,flag_score,flags):
         cats.append(out)
 
     for ind,flag in enumerate(flags):
-        if not cats[ind].empty:
+        if trimmed and not cats[ind].empty:
             cats[ind] = trim(cats[ind])        
         cats[ind] = cats[ind].agg(lambda x: format_flag_cats(x,flag),axis=1)
         
@@ -163,9 +195,10 @@ def generate_toy_data(N,m,r):
     return scores,metrics
 
 if __name__ == '__main__':
-    N = 1000
+    N = 100
     m = 3
     r = 50
     
     scores,metrics = generate_toy_data(N,m,r)
-    categories = find_categories(scores)        
+    # categories = find_categories(scores)
+    out = find_category(scores,['A','BC'])
