@@ -8,6 +8,7 @@ custom/*.lua
 !custom/TIS100M-*.lua
 save/deleted
 save/*.txt
+save/TIS100M/*/raw
 sheets/from_tally
 sheets/processed/*_raw.csv
 lua51.dll
