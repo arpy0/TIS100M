@@ -1,0 +1,59 @@
+##mr_puzzel 220607/6/31
+@0
+##ITERATE OVER ALL
+MOV UP DOWN
+
+@1
+
+
+@2
+
+
+@3
+MOV UP RIGHT
+
+@4
+MOV LEFT ACC
+SAV
+
+*:
+SWP #IN
+MOV ACC RIGHT
+SWP #DIVISOR
+MOV RIGHT NIL
+MOV ACC RIGHT
+JRO RIGHT
+MOV ACC RIGHT
+SUB 1
+JGZ *
+
+MOV 0 RIGHT
+
+@5
+IN: MOV LEFT ACC
+    JEZ >
+/?: MOV -1 LEFT
+    SUB LEFT
+    JGZ /?
+    JEZ /Y
+/N: MOV 2 LEFT
+    JMP IN
+/Y: MOV 1 LEFT
+    SWP
+    ADD LEFT
+    SWP
+    JMP IN
+>:  SWP
+    MOV ACC RIGHT
+
+@6
+MOV LEFT DOWN
+
+@7
+
+
+@8
+
+
+@9
+MOV UP DOWN

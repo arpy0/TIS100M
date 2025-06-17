@@ -1,0 +1,82 @@
+##anningmay 187/7/54
+@0
+MOV RIGHT DOWN
+
+@1
+MOV UP LEFT
+
+@2
+## FIRST SOLVE
+
+@3
+MOV UP DOWN
+
+@4
+
+
+@5
+
+
+@6
+
+
+@7
+^: MOV UP ACC
+   JEZ >
+   SUB 1
+   MOV ACC RIGHT
+   MOV UP ACC
+   MOV ACC RIGHT
++: MOV UP RIGHT
+   SUB 1
+   JGZ +
+   JMP ^
+>: MOV UP ACC
+O: MOV UP DOWN
+   SUB 1
+   JGZ O
+   MOV 0 DOWN
+
+@8
+^: MOV LEFT ACC
+   JEZ >
+   SUB 1
+   MOV ACC RIGHT
+   MOV LEFT ACC
+   MOV ACC RIGHT
++: MOV LEFT RIGHT
+   SUB 1
+   JGZ +
+   JMP ^
+>: MOV LEFT ACC
+O: MOV LEFT DOWN
+   SUB 1
+   JGZ O
+   MOV 0 DOWN
+
+@9
+^: MOV LEFT ACC
+   JEZ >
+   SUB 1
+   MOV ACC RIGHT
+   MOV LEFT ACC
+   MOV ACC RIGHT
++: MOV LEFT RIGHT
+   SUB 1
+   JGZ +
+   JMP ^
+>: MOV LEFT ACC
+O: MOV LEFT DOWN
+   SUB 1
+   JGZ O
+   MOV 0 DOWN
+
+@10
+ MOV LEFT NIL
+ MOV LEFT ACC
+
+>: MOV LEFT DOWN
+   SUB 1
+   JGZ >
+
+ MOV 0 DOWN

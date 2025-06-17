@@ -1,0 +1,116 @@
+##mr_puzzel 399/8/92
+@0
+## DBL FOLD & TBL
+#
+# SAME IDEA AS
+#"2-FOLD & LOOKUP"
+# BUT WITH
+# 2 PIPELINES
+
+@1
+	 MOV UP RIGHT
+     MOV UP ACC
+     SUB 50
+     JLZ <50
+>=50:MOV ACC DOWN
+     JMP *
+ <50:NEG
+     MOV 0 DOWN
+   *:SUB 25
+     JGZ >=25
+ <25:MOV ACC DOWN
+     JMP **
+>=25:NEG
+     MOV 0 DOWN
+  **:MOV ACC DOWN
+
+@2
+     MOV LEFT ACC
+     SUB 50
+     JLZ <50
+>=50:MOV ACC DOWN
+     JMP *
+ <50:NEG
+     MOV 0 DOWN
+   *:SUB 25
+     JGZ >=25
+ <25:MOV ACC DOWN
+     JMP **
+>=25:NEG
+     MOV 0 DOWN
+  **:MOV ACC DOWN
+
+@3
+MOV RIGHT DOWN
+
+@4
+    MOV UP ACC
+    ADD ACC
+    SUB UP
+    MOV ACC LEFT
+    MOV UP ACC
+    ADD 18
+    JGZ >7
+    MOV 21 ACC
+ >7:SUB 5
+    JGZ >12
+    MOV 15 ACC
+>12:SUB 3
+    JGZ >15
+    MOV 11 ACC
+>15:MOV ACC LEFT
+
+@5
+    MOV UP ACC
+    ADD ACC
+    SUB UP
+    MOV ACC DOWN
+    MOV UP ACC
+    ADD 18
+    JGZ >7
+    MOV 21 ACC
+ >7:SUB 5
+    JGZ >12
+    MOV 15 ACC
+>12:SUB 3
+    JGZ >15
+    MOV 11 ACC
+>15:MOV ACC DOWN
+
+@6
+MOV UP ACC
+JRO UP
+NOP
+NOP
+SUB 1
+NOP
+NOP
+SUB 1
+NOP
+SUB 1
+NOP
+ADD 4
+ADD 1
+ADD 1
+MOV ACC RIGHT
+
+@7
+MOV RIGHT DOWN
+MOV LEFT DOWN
+
+@8
+MOV UP ACC
+JRO UP
+NOP
+NOP
+SUB 1
+NOP
+NOP
+SUB 1
+NOP
+SUB 1
+NOP
+ADD 4
+ADD 1
+ADD 1
+MOV ACC LEFT

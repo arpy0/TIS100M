@@ -1,0 +1,60 @@
+##Hersmunch 169/7/34
+@0
+
+
+@1
+MOV UP DOWN
+
+@2
+
+
+@3
+
+
+@4
+MOV UP RIGHT
+
+@5
+MOV LEFT DOWN
+
+@6
+
+
+@7
+MOV RIGHT DOWN
+
+@8
+L: JEZ T
+   SUB 5
+3: ADD 4
+   JMP L
+   JMP 3
+T: JRO RIGHT
+   JMP 1
+0: MOV RIGHT ACC
+   MOV ACC LEFT
+   JNZ 0
+   JMP T
+1: MOV RIGHT ACC
+   MOV ACC DOWN
+   JNZ 1
+
+@9
+T: MOV  2 ACC
+   SUB UP
+   JNZ N
+L0:MOV UP ACC
+V0:SUB 1
+   MOV UP DOWN
+   JGZ V0
+   MOV  0 DOWN
+   JMP T
+N: MOV ACC LEFT
+L1:MOV UP ACC
+V1:SUB 1
+   MOV UP ANY
+   JGZ V1
+Z: MOV  0 LAST
+
+@10
+MOV LEFT DOWN

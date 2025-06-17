@@ -9,5 +9,6 @@ custom/*.lua
 save/deleted
 save/*.txt
 sheets/from_tally
+sheets/processed/*_raw.csv
 lua51.dll
 TIS-100-CXX.exe

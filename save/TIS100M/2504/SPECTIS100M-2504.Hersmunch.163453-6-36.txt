@@ -1,0 +1,69 @@
+##Hersmunch 163453/6/36
+@0
+MOV ACC LAST
+
+MOV UP  ACC
+MOV ACC ANY
+
+JRO ACC
+SUB 1
+ADD 749
+
+@1
+MOV 1 ACC
+MOV LEFT DOWN
+
+ADD 1
+
+MOV ACC DOWN
+JRO DOWN
+
+MOV LEFT DOWN
+
+@2
+
+
+@3
+
+
+@4
+S: MOV UP  ACC
+   JMP N
+G: SUB UP
+E: MOV  -1 UP
+   JGZ G
+   MOV ACC RIGHT
+   MOV UP  RIGHT
+   MOV  -2 UP
+   SWP
+N: SAV
+   SUB UP
+   JGZ E
+L: MOV  1 UP
+   MOV UP RIGHT
+
+@5
+MOV LEFT DOWN
+
+@6
+
+
+@7
+
+
+@8
+S: MOV UP ACC
+   JLZ L
+
+G: MOV ACC RIGHT
+   JMP S
+
+L: MOV UP NIL
+
+@9
+   MOV -748 ACC
+
+L: ADD LEFT
+   JLZ L
+
+   MOV ACC DOWN

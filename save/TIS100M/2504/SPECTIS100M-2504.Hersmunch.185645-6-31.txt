@@ -1,0 +1,59 @@
+##Hersmunch 185645/6/31
+@0
+MOV UP  RIGHT
+
+@1
+MOV 0 ACC
+MOV LEFT DOWN
+
+ADD 1
+
+MOV ACC DOWN
+JRO DOWN
+
+@2
+
+
+@3
+
+
+@4
+S: MOV UP  ACC
+   JMP N
+G: SUB UP
+E: MOV  -1 UP
+   JGZ G
+   MOV ACC RIGHT
+   MOV UP  RIGHT
+   MOV  -2 UP
+   SWP
+N: SAV
+   SUB UP
+   JGZ E
+L: MOV -99 UP
+   MOV 749 RIGHT
+
+@5
+MOV LEFT DOWN
+
+@6
+
+
+@7
+
+
+@8
+S: MOV UP ACC
+   JGZ G
+   JEZ Z
+L: MOV UP NIL
+Z: MOV 1 ACC
+G: MOV ACC RIGHT
+
+@9
+   MOV -748 ACC
+
+L: ADD LEFT
+   JLZ L
+
+   MOV ACC DOWN

@@ -1,0 +1,64 @@
+##Hersmunch 6964/3/33
+@0
+
+
+@1
+   MOV UP  ACC
+N: ADD ACC
+   SUB 5
+G: MOV ACC DOWN
+   MOV ACC DOWN
+   MOV ACC DOWN
+   MOV ACC DOWN
+Z: MOV ACC DOWN
+   SUB 10
+   JGZ G
+   MOV 800 DOWN
+
+   MOV UP  ACC
+   JNZ N
+   JMP Z
+
+@2
+#ADD 39
+#ADD 39
+#MOV ACC LEFT
+#ADD 1
+#SUB 39
+#SUB 39
+
+@3
+
+
+@4
+S: MOV -50 ACC
+L2:ADD UP
+   MOV  4  DOWN
+L: ADD UP
+   JLZ L
+   SUB 400
+   JLZ L2
+   SUB 200
+   JGZ G
+   MOV  -2 DOWN
+   ADD 200
+G: SUB 100
+   JGZ O
+   MOV  -1 DOWN
+O: MOV 995 DOWN
+
+@5
+
+
+@6
+
+
+@7
+   MOV -999 ACC
+
+L: ADD UP
+   JLZ L
+
+   MOV ACC DOWN
+
+@8

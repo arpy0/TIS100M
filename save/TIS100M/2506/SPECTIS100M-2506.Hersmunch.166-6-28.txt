@@ -1,0 +1,61 @@
+##Hersmunch 166/6/28
+@0
+
+
+@1
+MOV UP DOWN
+
+@2
+
+
+@3
+
+
+@4
+MOV UP DOWN
+
+@5
+
+
+@6
+
+
+@7
+
+
+   MOV 2 RIGHT
+
+0: MOV RIGHT ACC
+   MOV ACC   DOWN
+   JNZ 0
+
+@8
+T: MOV UP  ACC
+   JGZ G
+0: JRO LEFT
+G: MOV ACC RIGHT
+
+L: MOV UP ACC
+V: SUB 1
+   MOV UP ANY
+   JGZ V
+   MOV  0 LAST
+
+@9
+T: JRO LEFT
+1: MOV 11 ACC
+2: JMP E
+3: MOV LEFT ACC
+   MOV ACC  RIGHT
+   JNZ 3
+
+L: SUB 2
+   JLZ T
+E: JGZ L
+
+V: MOV LEFT ACC
+   MOV ACC  DOWN
+   JNZ V
+
+@10
+MOV LEFT DOWN

@@ -1,0 +1,66 @@
+##Hersmunch 152/6/35
+@0
+
+
+@1
+MOV UP DOWN
+
+@2
+
+
+@3
+
+
+@4
+MOV UP DOWN
+
+@5
+
+
+@6
+
+
+@7
+
+
+   MOV 2 RIGHT
+
+   MOV RIGHT DOWN
+0: MOV RIGHT ACC
+   MOV ACC   DOWN
+   JNZ 0
+
+@8
+T: MOV UP  ACC
+   JGZ G
+0: JRO LEFT
+G: MOV ACC RIGHT
+
+L: MOV 6 ACC
+   SUB UP
+V: MOV UP ANY
+   JRO ACC
+   MOV UP LAST
+   MOV UP LAST
+   MOV UP LAST
+   MOV UP LAST
+   MOV  0 LAST
+
+@9
+T: JRO LEFT
+1: JMP W
+   JMP E
+   MOV LEFT RIGHT
+3: MOV LEFT ACC
+   MOV ACC  RIGHT
+   JNZ 3
+   JMP T
+W: NOP
+   JRO -3
+E: MOV LEFT DOWN
+2: MOV LEFT ACC
+   MOV ACC  DOWN
+   JNZ 2
+
+@10
+MOV LEFT DOWN

@@ -1,0 +1,61 @@
+##Hersmunch 3365/5/32
+@0
+   JNZ N
+   MOV -1 RIGHT
+
+   MOV 15 ACC
+G: SUB 2
+   JGZ G
+
+N: MOV UP DOWN
+
+@1
+MOV UP LEFT
+
+@2
+
+
+@3
+MOV UP ACC
+MOV RIGHT NIL
+
+MOV ACC RIGHT
+MOV -1  DOWN
+JRO RIGHT
+
+MOV 1 DOWN
+
+@4
+R: MOV 1  LEFT
+   MOV UP DOWN
+
+G: MOV UP  ACC
+   MOV ACC DOWN
+   JGZ G
+
+N: MOV -2   LAST
+   MOV DOWN ACC
+   MOV ACC  UP
+   JNZ N2
+   JRO LEFT
+N2:SUB ANY
+   JNZ N
+
+@5
+
+
+@6
+
+
+@7
+   MOV -13 ACC
+   ADD 1
+   JRO UP
+
+   JNZ N
+   SUB 11
+N: ADD 10
+
+   MOV ACC DOWN
+
+@8

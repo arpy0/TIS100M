@@ -1,0 +1,53 @@
+##Hersmunch 15154/3/24
+@0
+
+
+@1
+   MOV -1  ACC
+   ADD UP
+   MOV ACC DOWN
+   ADD ACC
+
+G: MOV ACC DOWN
+   MOV ACC DOWN
+   MOV ACC DOWN
+   SUB 3
+   JGZ G
+
+   MOV 800 DOWN
+
+@2
+
+
+@3
+
+
+@4
+   MOV -99 ACC
+
+L: ADD UP
+   JLZ L
+   MOV   2 DOWN
+   SUB 400
+   JLZ L
+
+   SUB 200
+   JGZ G
+   MOV  -1 DOWN
+G: MOV 997 DOWN
+
+@5
+
+
+@6
+
+
+@7
+   MOV -999 ACC
+
+L: ADD UP
+   JLZ L
+
+   MOV ACC DOWN
+
+@8
