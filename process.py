@@ -7,7 +7,7 @@ from zipfile import ZipFile
 import pareto
 
 # The only input is the month!
-month = '2503'
+month = '2506'
 filename = f'TIS100M-{month}'
 
 run = True
