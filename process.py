@@ -58,7 +58,7 @@ if run:
         if sol.name[-3:] == 'zip': 
             sol.unlink()
             continue
-        cmd = subprocess.run(f'TIS-100-CXX -L {puzz} {sol} --seeds 1..10000 --limit 1000000 -j 0',capture_output=True)
+        cmd = subprocess.run(f'TIS-100-CXX -L {puzz} {sol} --seeds 1..10k --limit 1M -j 0',capture_output=True)
         out = cmd.stdout.decode('utf-8')
         error = cmd.stderr.decode('utf-8')
         if error: print(error)

@@ -1,0 +1,43 @@
+## 498/4/16
+@0
+#498/4P3/16
+
+@1
+
+
+@2
+MOV UP DOWN
+
+@3
+
+
+@4
+ADD UP
+MOV ACC LEFT
+
+MOV -100 ACC
+
+A: ADD DOWN
+JLZ A
+
+@5
+
+
+@6
+
+
+@7
+MOV ACC RIGHT
+
+MOV UP ACC
+MOV ACC DOWN
+SUB 1
+
+@8
+B: MOV 100 UP
+MOV LEFT ACC
+
+JMP C
+A: SUB 2
+MOV 1 UP
+C: JGZ A

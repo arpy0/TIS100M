@@ -1,0 +1,38 @@
+##Hersmunch 1073/4/16
+@0
+
+
+@1
+
+
+@2
+S: ADD UP
+   MOV ACC DOWN
+   MOV ACC RIGHT
+   MOV 1 ACC
+   ADD LAST
+   MOV -99 ANY
+   SWP
+G: SUB 2
+   MOV -1 RIGHT
+   JGZ G
+   MOV RIGHT ACC
+   ADD 1
+Z: JRO RIGHT
+
+@3
+
+
+@4
+MOV UP LEFT
+
+@5
+MOV UP UP
+
+@6
+
+
+@7
+MOV UP DOWN
+
+@8

@@ -4,6 +4,7 @@ __pycache__
 *.zip
 steam_autocloud.vdf
 custom/deleted
+custom/future
 custom/*.lua
 !custom/TIS100M-*.lua
 save/deleted

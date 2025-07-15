@@ -1,0 +1,42 @@
+## 856/3/15
+@0
+#856/3P2/15
+
+@1
+MOV -100 ACC
+
+A: ADD RIGHT
+JLZ A
+MOV ACC DOWN
+SWP
+MOV ACC RIGHT
+
+@2
+MOV UP LEFT
+
+A: SUB 2
+JLZ B
+MOV 1 LEFT
+JMP A
+
+B: MOV 100 LEFT
+
+MOV LEFT ACC
+SWP
+
+@3
+
+
+@4
+
+
+@5
+
+
+@6
+
+
+@7
+MOV UP DOWN
+
+@8

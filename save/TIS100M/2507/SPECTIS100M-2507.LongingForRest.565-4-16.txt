@@ -1,0 +1,39 @@
+##LongingForRest 565/4/16
+@0
+## 565/4/16/3P
+
+@1
+
+
+@2
+MOV UP DOWN
+MOV 1 ACC
+ADD LAST
+SWP
+MOV DOWN ANY
+G:SUB 2
+JGZ G
+L:MOV -9 DOWN
+
+@3
+
+
+@4
+ADD UP
+MOV ACC LEFT
+MOV ACC UP
+MOV -2 ACC
+L:ADD 1
+JRO ANY
+
+@5
+
+
+@6
+
+
+@7
+MOV UP DOWN
+
+@8
+MOV -1 UP

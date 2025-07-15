@@ -1,0 +1,41 @@
+##Hersmunch 570/4/16
+@0
+
+
+@1
+
+
+@2
+ADD UP
+MOV ACC  DOWN
+
+MOV RIGHT ACC
+ADD 1
+JRO RIGHT
+
+@3
+
+
+@4
+MOV UP  ACC
+MOV ACC LEFT
+SWP
+ADD 1
+MOV ACC RIGHT
+
+@5
+G: SUB 2
+   MOV -1 UP
+   JGZ G
+
+   MOV -9 UP
+
+   MOV LEFT ACC
+
+@6
+
+
+@7
+MOV UP DOWN
+
+@8

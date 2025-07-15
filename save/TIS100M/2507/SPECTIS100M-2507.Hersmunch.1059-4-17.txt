@@ -1,0 +1,39 @@
+##Hersmunch 1059/4/17
+@0
+
+
+@1
+MOV RIGHT RIGHT
+
+@2
+   ADD UP
+   MOV ACC DOWN
+   MOV LAST RIGHT
+   SWP
+   MOV ACC ANY
+   MOV RIGHT ACC
+   MOV -99 RIGHT
+G: MOV -1 RIGHT
+   SUB 2
+   JGZ G
+   JEZ Z
+   MOV RIGHT ACC
+   ADD 1
+Z: JRO RIGHT
+
+@3
+
+
+@4
+MOV UP LEFT
+
+@5
+
+
+@6
+
+
+@7
+MOV UP DOWN
+
+@8

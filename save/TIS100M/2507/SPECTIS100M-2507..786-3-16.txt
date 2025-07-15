@@ -1,0 +1,43 @@
+## 786/3/16
+@0
+#786/3P2/16
+
+@1
+MOV -100 ACC
+
+A: ADD RIGHT
+JLZ A
+MOV ACC DOWN
+SWP
+MOV ACC RIGHT
+
+@2
+MOV UP LEFT
+
+JMP B
+A: SUB 2
+MOV 1 LEFT
+B: JGZ A
+
+MOV 100 LEFT
+
+MOV -1 ACC
+ADD LEFT
+SWP
+
+@3
+
+
+@4
+
+
+@5
+
+
+@6
+
+
+@7
+MOV UP DOWN
+
+@8
