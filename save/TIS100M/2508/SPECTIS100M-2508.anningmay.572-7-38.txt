@@ -1,0 +1,65 @@
+##anningmay 572/7/38
+@0
+ MOV UP DOWN
+
+@1
+^:JRO RIGHT
+
+ ADD 1
+ JMP ^
+
+ MOV ACC DOWN
+
+@2
+^:MOV UP ACC
+  JLZ *
+  MOV ACC DOWN
+  MOV 1 LEFT
+  JMP ^
+
+*:MOV 3 LEFT
+
+@3
+## 572 CYCLES
+
+@4
+ MOV RIGHT ACC
+
+*:MOV 1 DOWN
+  SUB 1
+  JGZ *
+
+ MOV RIGHT ACC
+
+>:MOV -8 DOWN
+  SUB 1
+  MOV UP DOWN
+  JGZ >
+
+@5
+ MOV UP ACC
+
+^:MOV ACC LEFT
+  JMP ^
+
+@6
+ JMP ^
+
+<-:MOV LEFT ACC
+   MOV ACC RIGHT
+   ADD UP
+   JLZ +
+   MOV ACC DOWN
+   JMP ^
++: ADD 26
+   MOV ACC DOWN
+
+^: JRO UP
+
+->:MOV RIGHT LEFT
+   JMP ^
+
+@7
+MOV UP ACC
+NEG
+MOV ACC LEFT

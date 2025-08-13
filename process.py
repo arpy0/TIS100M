@@ -7,7 +7,7 @@ from zipfile import ZipFile
 import pareto
 
 # The only input is the month!
-month = '2506'
+month = '2508'
 filename = f'TIS100M-{month}'
 
 run = True
@@ -43,7 +43,11 @@ for ind,row in table.iterrows():
         zipped = ZipFile(sol)
         for i,file in enumerate(zipped.namelist()):
             sol = Path(f'{sols}/SPEC{filename}.{person}_{tag}.{i}.txt')
-            sol.write_text(zipped.open(file).read().decode('utf-8'),newline='\n')
+            try:
+                sol.write_text(zipped.open(file).read().decode(),newline='\n')
+            except:
+                sol.write_text(zipped.open(file).read().decode('mac-roman'),newline='\n')
+                
         zipped.close()
 
 # %% run_solutions
@@ -58,12 +62,14 @@ if run:
         if sol.name[-3:] == 'zip': 
             sol.unlink()
             continue
-        cmd = subprocess.run(f'TIS-100-CXX -L {puzz} {sol} --seeds 1..10k --limit 1M -j 0',capture_output=True)
+        cmd = subprocess.run(f'TIS-100-CXX -L {puzz} {sol} --seeds 1..100k --limit 1M -j 0 --cheat-rate 0.1 --stats',capture_output=True)
         out = cmd.stdout.decode('utf-8')
         error = cmd.stderr.decode('utf-8')
-        if error: print(error)
+        if error: 
+            print(error)
+            continue
+        if not out: continue
         print(out)
-        print()
         score = out.split()[3].split('/')
         if len(score) == 3: score.append('0')
         if score[-1] == 'c': score[-1] = '1'

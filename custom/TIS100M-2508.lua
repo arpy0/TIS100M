@@ -85,7 +85,7 @@ function get_streams()
 	end
 	
 
-    keyout = {table.unpack(key)}
+    keyout = {unpack(key)}
 	keyout[#keyout + 1] = -1
 
 	return {

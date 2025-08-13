@@ -1,0 +1,66 @@
+##anningmay 591/6/41
+@0
+ MOV RIGHT DOWN
+^:MOV UP DOWN
+  JMP ^
+
+@1
+^:JRO RIGHT
+
+ ADD 1
+ JMP ^
+
+ MOV ACC LEFT
+
+@2
+^:MOV UP ACC
+  JLZ *
+  MOV ACC DOWN
+  MOV 1 LEFT
+  JMP ^
+
+*:MOV 3 LEFT
+
+@3
+## 591 CYCLES
+
+@4
+ MOV UP ACC
+ MOV 1 DOWN
+ MOV ACC DOWN
+
+^:SAV
+>:MOV -7 DOWN
+  MOV UP DOWN
+  SUB 1
+  JGZ >
+
+ MOV 1 DOWN
+ SWP
+ MOV ACC DOWN
+ JMP ^
+
+@5
+
+
+@6
+ JMP ^
+<-:MOV LEFT ACC
+   MOV ACC RIGHT
+   ADD UP
+   JLZ +
+   JMP O
++: ADD 26
+O: MOV ACC DOWN
+^: JRO UP
+
+ MOV UP ACC
+
+->:MOV RIGHT LEFT
+   SUB 1
+   JGZ ->
+
+@7
+MOV UP ACC
+NEG
+MOV ACC LEFT

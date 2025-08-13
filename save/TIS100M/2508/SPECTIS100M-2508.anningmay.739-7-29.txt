@@ -1,0 +1,50 @@
+##anningmay 739/7/29
+@0
+MOV UP DOWN
+
+@1
+ MOV RIGHT DOWN
+
+@2
+ MOV UP LEFT
+
+@3
+MOV RIGHT DOWN
+
+@4
+^:MOV RIGHT ACC
+  JLZ *
+  MOV ACC LEFT
+  JMP ^
+
+*:MOV ACC DOWN
+
+>:MOV UP ACC
+  SUB DOWN
+  JLZ +
+  JMP O
++:ADD 26
+O:MOV ACC DOWN
+  JMP >
+
+@5
+MOV UP LEFT
+
+@6
+ MOV -1 LEFT
+ MOV UP ACC
+
+->:MOV ACC RIGHT
+   MOV LEFT ACC
+   JLZ <-
+   JMP ->
+
+<-:MOV ACC LEFT
+   MOV RIGHT ACC
+   JLZ ->
+   MOV ACC UP
+   MOV UP DOWN
+   JMP <-
+
+@7
+## 29 INST

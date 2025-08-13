@@ -1,0 +1,60 @@
+##anningmay 673/6/32
+@0
+ MOV UP DOWN
+
+@1
+ MOV RIGHT DOWN
+
+@2
+ MOV -1 ACC
+
+^:MOV ACC DOWN
+  MOV UP ACC
+  JGZ ^
+
+ MOV ACC LEFT
+ JRO 0
+
+@3
+## CHEAT
+
+@4
+ MOV RIGHT DOWN
+
+^:MOV UP ACC
+  SUB DOWN
+  JLZ +
+>:MOV ACC DOWN
+  JMP ^
+
+
+
+
+
++:ADD 26
+  JMP >
+
+@5
+ MOV UP ACC
+
+^:MOV ACC DOWN
+  MOV RIGHT ACC
+  JGZ ^
+
+ MOV ACC LEFT
+
+@6
+ MOV UP ACC
+^:MOV ACC LEFT
+  MOV RIGHT ACC
+  JLZ -
+  MOV ACC UP
+  MOV UP DOWN
+  JMP ^
+
+-:MOV ACC RIGHT
+  MOV LEFT ACC
+  JGZ -
+  JMP ^
+
+@7

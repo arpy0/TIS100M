@@ -1,0 +1,64 @@
+##anningmay 710/6/35
+@0
+ MOV UP DOWN
+
+@1
+ MOV RIGHT DOWN
+
+@2
+ MOV -1 ACC
+
+^:MOV ACC DOWN
+  MOV UP ACC
+  JLZ >
+  JMP ^
+
+>:MOV ACC LEFT
+  JRO 0
+
+@3
+## NO C 710/6/35
+
+@4
+ MOV RIGHT DOWN
+
+^:MOV UP ACC
+  SUB DOWN
+  JLZ +
+>:MOV ACC DOWN
+  JMP ^
+
+
+
+
+
++:ADD 26
+  MOV ACC DOWN
+  JMP ^
+
+@5
+ MOV UP ACC
+
+^:MOV ACC DOWN
+  MOV RIGHT ACC
+  JLZ >
+  JMP ^
+
+>:MOV ACC LEFT
+
+@6
+ MOV UP ACC
+
+^:MOV ACC LEFT
+  MOV RIGHT ACC
+  JLZ -
+  MOV ACC UP
+  MOV UP DOWN
+  JMP ^
+
+-:MOV ACC RIGHT
+  MOV LEFT ACC
+  JLZ ^
+  JMP -
+
+@7
