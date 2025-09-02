@@ -33,10 +33,10 @@ def find_frontiers(scores,formatted=True):
     That means no consideration of tiebreakers past the given metrics.
     """
     labels = list(pareto_iter(scores.columns))
-    frontiers = pd.DataFrame(False,columns=labels,index=scores.index)
+    frontiers = pd.DataFrame(columns=labels,index=scores.index,dtype=bool)
     for label in labels:
         label_ind = list(label)
-        frontiers.loc[check_pareto(scores[label_ind]),label] = True
+        frontiers[label] = check_pareto(scores[label_ind])
     if formatted:
         format_frontiers = lambda x: (' '.join([format_label(j) for j in frontiers.columns[x]]))
         frontiers = frontiers.apply(format_frontiers,axis=1)
@@ -104,25 +104,9 @@ def find_category(scores,metrics=None,formatted=True):
         out = out.replace([False,True],['',''.join(format_label(i) for i in metrics)])
     return out
 
-def find_flagged_category(scores,flag_score,flags,metrics=None,formatted=True):
-    """
-    Finds a category based on the given order of metrics.
-    If metrics is None, the column order is taken as given.
-    """
-    out = pd.Series('',index=scores.index,dtype=str)
-    for ind,flag in enumerate(flags):
-        inds = flag_score<=ind
-        temp = pd.Series('',index=scores.index,dtype=str)
-        temp.loc[inds] = find_category(scores.loc[inds])
-        temp[temp!=''] = flag + temp[temp!='']
-        out.loc[out==''] += temp[out=='']
-        
-    return out.fillna('')
-
-    
 format_cats = lambda x: ','.join([''.join(format_label(i) for i in j) for j in x if not pd.isna(j)])
 
-def find_categories(scores,pareto_only=False,trimmed=True,formatted=True):
+def find_categories_old(scores,pareto_only=False,trimmed=True,formatted=True):
     """
     This is the big function that combines all the prior functions.
     Follow what they do to know what this does.
@@ -138,6 +122,56 @@ def find_categories(scores,pareto_only=False,trimmed=True,formatted=True):
         return fcats
     else:
         return cats
+
+def find_categories(scores,pareto_only=False,trimmed=True,formatted=True):
+    def get_subset_cols(label,metrics):
+        sort_key = lambda x: (metrics==x).nonzero()[0][0]
+        return [''.join(sorted(label+j,key=sort_key)) for j in pareto_iter(sorted(set(metrics)-set(label)))]
+    metrics = scores.columns
+    if pareto_only: 
+        scores = scores.loc[check_pareto(scores)]
+    frs = find_frontiers(scores,formatted=False)
+    cats = pd.DataFrame(index=scores.index)
+    def trim(fr,previous=[]):
+        for label in fr.columns:
+            subset_cols = get_subset_cols(label,metrics)
+            frsub = fr.loc[fr[label],subset_cols]
+            for grouped in scores.loc[frsub.index].groupby(list(label)).groups.values():
+                frsubg = frsub.loc[grouped]     
+                if frsubg.all().all():
+                    temp = frs.loc[frsubg.index,previous+[label]]
+                    new_cats = temp.apply(absorb,axis=1)
+                    old_cats = cats.loc[frsubg.index].dropna(axis=1) 
+                    def test_func(new,old):
+                        old = old.loc[new.name]
+                        return old.apply(lambda x: any([set(o)<set(n) for o,n in zip(x,new[0])]))
+                
+                    add_test = new_cats.apply(test_func,axis=1,args=(old_cats,)).any(axis=1).any()
+                    if not add_test:
+                        update = pd.concat((old_cats,new_cats),ignore_index=True,axis=1)
+                        # print(update) 
+                        cats.loc[temp.index,update.columns] = update
+                        # print()
+                else:
+                    trim(frsubg,previous+[label])
+    if trimmed: trim(frs)
+    if formatted: cats = cats.agg(format_cats,axis=1)
+    return cats
+
+def find_flagged_category(scores,flag_score,flags,metrics=None,formatted=True):
+    """
+    Finds a category based on the given order of metrics.
+    If metrics is None, the column order is taken as given.
+    """
+    out = pd.Series('',index=scores.index,dtype=str)
+    for ind,flag in enumerate(flags):
+        inds = flag_score<=ind
+        temp = pd.Series('',index=scores.index,dtype=str)
+        temp.loc[inds] = find_category(scores.loc[inds])
+        temp[temp!=''] = flag + temp[temp!='']
+        out.loc[out==''] += temp[out=='']
+        
+    return out.fillna('')
     
 def prune_flag_categories(higher,lower):
     """
@@ -168,7 +202,7 @@ def find_flagged_categories(scores,flag_score,flags,trimmed=True):
     cats = []
     for ind,flag in enumerate(flags):
         inds = flag_score<=ind
-        temp = find_categories(scores.loc[inds],trimmed=False,formatted=False)
+        temp = find_categories_old(scores.loc[inds],trimmed=False,formatted=False)
         out = pd.DataFrame(columns = temp.columns, index=scores.index)
         out.iloc[:,0] = [tuple() for i in range(out.shape[0])]
         out.loc[temp.index] = temp
@@ -195,10 +229,35 @@ def generate_toy_data(N,m,r):
     return scores,metrics
 
 if __name__ == '__main__':
-    N = 100
-    m = 3
-    r = 50
+    import sqlite3
+    # N = 10000
+    # m = 7
+    # r = 50
     
-    scores,metrics = generate_toy_data(N,m,r)
-    # categories = find_categories(scores)
-    out = find_category(scores,['A','BC'])
+    # scores,metrics = generate_toy_data(N,m,r)
+    # # categories = find_categories(scores)
+    # # out = find_category(scores,['A','BC'])
+    # scores = scores.loc[check_pareto(scores)]
+    
+    con = sqlite3.connect(r'leaderboard.db')
+    db = pd.read_sql('SELECT * FROM test',con,index_col='index')
+    db = db.loc[db.PUZZLE=='STABILIZED_WATER']
+    # db = db.loc[db['OVERLAP']==0]
+    # db = db.loc[db['TRACKLESS']==1]
+    db['NTRACKLESS'] = 1-db['TRACKLESS']
+    # db = db.loc[db['LOOPING']==1]
+    db['NLOOPING'] = 1-db['LOOPING']
+    db = db[check_pareto(db[['COST','CYCLES','AREA','INSTRUCTIONS','NTRACKLESS','NLOOPING','OVERLAP']])]
+    df = db.loc[:,['COST','CYCLES','AREA','INSTRUCTIONS','NTRACKLESS','NLOOPING','OVERLAP']]
+    df.columns = list('GCAITLN')
+
+    fr = find_frontiers(df,formatted=False)
+    cats = find_categories(df)
+    
+    db['CATEGORIES'] = cats
+    db_lite = db[['COST','CYCLES','AREA','INSTRUCTIONS','CATEGORIES','NTRACKLESS','NLOOPING','OVERLAP']]
+    
+    
+    
+    
+    
