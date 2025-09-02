@@ -127,6 +127,8 @@ def find_categories(scores,pareto_only=False,trimmed=True,formatted=True):
     def get_subset_cols(label,metrics):
         sort_key = lambda x: (metrics==x).nonzero()[0][0]
         return [''.join(sorted(label+j,key=sort_key)) for j in pareto_iter(sorted(set(metrics)-set(label)))]
+    def get_other_superset_cols(label,metrics,include):
+        return [j for j in pareto_iter(list(label)) if j in include and j!=label]
     metrics = scores.columns
     if pareto_only: 
         scores = scores.loc[check_pareto(scores)]
@@ -135,28 +137,24 @@ def find_categories(scores,pareto_only=False,trimmed=True,formatted=True):
     def trim(fr,previous=[]):
         for label in fr.columns:
             subset_cols = get_subset_cols(label,metrics)
-            frsub = fr.loc[fr[label],subset_cols]
+            other_superset_cols = get_other_superset_cols(label,metrics,fr.columns)
+            frsub = fr.loc[~fr[other_superset_cols].any(axis=1)&fr[label],subset_cols]
             for grouped in scores.loc[frsub.index].groupby(list(label)).groups.values():
-                frsubg = frsub.loc[grouped]     
-                if frsubg.all().all():
+                frsubg = frsub.loc[grouped]
+                if frsubg.empty or frsubg.drop_duplicates().shape[0] == 1:
                     temp = frs.loc[frsubg.index,previous+[label]]
                     new_cats = temp.apply(absorb,axis=1)
                     old_cats = cats.loc[frsubg.index].dropna(axis=1) 
-                    def test_func(new,old):
-                        old = old.loc[new.name]
-                        return old.apply(lambda x: any([set(o)<set(n) for o,n in zip(x,new[0])]))
-                
-                    add_test = new_cats.apply(test_func,axis=1,args=(old_cats,)).any(axis=1).any()
-                    if not add_test:
-                        update = pd.concat((old_cats,new_cats),ignore_index=True,axis=1)
-                        # print(update) 
-                        cats.loc[temp.index,update.columns] = update
-                        # print()
+                    update = pd.concat((old_cats,new_cats),ignore_index=True,axis=1)
+                    # print(update) 
+                    cats.loc[temp.index,update.columns] = update
+                    # print()
                 else:
                     trim(frsubg,previous+[label])
     if trimmed: trim(frs)
     if formatted: cats = cats.agg(format_cats,axis=1)
     return cats
+
 
 def find_flagged_category(scores,flag_score,flags,metrics=None,formatted=True):
     """
@@ -242,20 +240,23 @@ if __name__ == '__main__':
     con = sqlite3.connect(r'leaderboard.db')
     db = pd.read_sql('SELECT * FROM test',con,index_col='index')
     db = db.loc[db.PUZZLE=='STABILIZED_WATER']
-    # db = db.loc[db['OVERLAP']==0]
-    # db = db.loc[db['TRACKLESS']==1]
-    db['NTRACKLESS'] = 1-db['TRACKLESS']
-    # db = db.loc[db['LOOPING']==1]
-    db['NLOOPING'] = 1-db['LOOPING']
-    db = db[check_pareto(db[['COST','CYCLES','AREA','INSTRUCTIONS','NTRACKLESS','NLOOPING','OVERLAP']])]
-    df = db.loc[:,['COST','CYCLES','AREA','INSTRUCTIONS','NTRACKLESS','NLOOPING','OVERLAP']]
-    df.columns = list('GCAITLN')
+    db = db.loc[db['OVERLAP']==0]
+    db = db.loc[db['TRACKLESS']==1]
+    # db['NTRACKLESS'] = 1-db['TRACKLESS']
+    db = db.loc[db['LOOPING']==1]
+    # db['NLOOPING'] = 1-db['LOOPING']
+    m = ['COST','CYCLES','AREA','INSTRUCTIONS']
+    df = db[m]
+    db = db[check_pareto(df)]
+    df = df[check_pareto(df)]
+    df.columns = list('GCAI')
 
     fr = find_frontiers(df,formatted=False)
     cats = find_categories(df)
+    cats2 = find_categories_old(df)
     
     db['CATEGORIES'] = cats
-    db_lite = db[['COST','CYCLES','AREA','INSTRUCTIONS','CATEGORIES','NTRACKLESS','NLOOPING','OVERLAP']]
+    db_lite = db[m+['CATEGORIES']]
     
     
     
