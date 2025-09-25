@@ -1,0 +1,68 @@
+##Hersmunch 2551/4/38
+@0
+
+
+@1
+
+
+@2
+
+
+@3
+
+
+@4
+
+
+@5
+   MOV 42 ACC
+A: MOV  0 DOWN
+   SUB 10
+   JGZ A
+
+B: ADD DOWN
+   MOV  1 DOWN
+   JLZ B
+
+@6
+
+
+@7
+
+
+@8
+MOV 100 RIGHT
+MOV  71 RIGHT
+MOV  42 RIGHT
+MOV  13 RIGHT
+MOV   9 RIGHT
+MOV  14 RIGHT
+MOV  25 RIGHT
+MOV  18 RIGHT
+MOV  50 RIGHT
+MOV  22 RIGHT
+MOV  75 RIGHT
+MOV 100 RIGHT
+
+@9
+   ADD UP
+S: MOV ACC DOWN
+   SWP
+   MOV RIGHT DOWN
+N: MOV LEFT ACC
+2: MOV  2 ANY
+   SUB 25
+   JGZ 2
+   JEZ Z
+3: MOV  3 DOWN
+   ADD 2
+   JLZ 3
+   JNZ N
+Z: MOV -1 DOWN
+   SWP
+
+@10
+S: ADD 17
+   MOV ACC LEFT
+   JEZ S
+   SUB 18

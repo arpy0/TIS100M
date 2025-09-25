@@ -1,0 +1,74 @@
+##Hersmunch 2074/5/43
+@0
+
+
+@1
+
+
+@2
+
+
+@3
+
+
+@4
+   MOV 173 DOWN
+   MOV   5 RIGHT
+
+L: MOV  46 DOWN
+   MOV   5 DOWN
+   MOV  21 DOWN
+   MOV  48 DOWN
+   MOV 348 DOWN
+   JMP L
+
+@5
+MOV ACC DOWN
+SWP
+ADD ANY
+
+@6
+   MOV 32 ACC
+A: MOV  0 LEFT
+   MOV -1 LEFT
+   SUB 10
+   JGZ A
+
+B: MOV 1 LEFT
+   ADD 1
+   JLZ B
+
+   MOV 0 LEFT
+   MOV 0 LEFT
+
+@7
+
+
+@8
+   MOV UP ACC
+2: SUB 25
+   MOV  2 RIGHT
+   JGZ 2
+
+3: MOV  3 RIGHT
+   ADD 1
+   JLZ 3
+
+@9
+S: ADD 17
+   MOV UP   DOWN
+   MOV ACC  DOWN
+   MOV LEFT DOWN
+   JRO UP
+   MOV LEFT DOWN
+   MOV LEFT DOWN
+   MOV LEFT DOWN
+   MOV LEFT DOWN
+   MOV LEFT DOWN
+   MOV LEFT DOWN
+   MOV LEFT DOWN
+   MOV -1   DOWN
+   JEZ S
+   SUB 18
+
+@10

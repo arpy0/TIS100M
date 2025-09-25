@@ -1,0 +1,72 @@
+##Hersmunch 2425/4/40
+@0
+
+
+@1
+
+
+@2
+
+
+@3
+
+
+@4
+
+
+@5
+S: ADD RIGHT
+   MOV ACC DOWN
+   SWP
+   ADD 17
+   MOV ACC DOWN
+   JEZ Z
+   SUB 18
+Z: SWP
+
+@6
+   MOV 46 ACC
+
+A: MOV  0 LEFT
+   SUB 10
+   JGZ A
+
+B: MOV  1 LEFT
+   ADD 1
+   JLZ B
+
+@7
+
+
+@8
+MOV 100 RIGHT
+MOV  71 RIGHT
+MOV  42 RIGHT
+MOV  13 RIGHT
+MOV -16 RIGHT
+MOV -11 RIGHT
+MOV  25 RIGHT
+MOV  -7 RIGHT
+MOV  50 RIGHT
+MOV  -3 RIGHT
+MOV  75 RIGHT
+MOV 100 RIGHT
+
+@9
+S: MOV UP DOWN
+   MOV UP DOWN
+
+N: MOV LEFT ACC
+   JLZ 3
+2: MOV  2 DOWN
+   SUB 25
+   JGZ 2
+   JEZ Z
+3: MOV  3 DOWN
+   ADD 2
+   JLZ 3
+   JNZ N
+
+Z: MOV -1 DOWN
+
+@10

@@ -1,0 +1,70 @@
+##Hersmunch 2550/3/41
+@0
+
+
+@1
+
+
+@2
+
+
+@3
+
+
+@4
+
+
+@5
+   ADD 32
+B: SWP
+   ADD 17
+   MOV ACC ANY
+   JEZ Z
+   SUB 18
+Z: SWP
+   JGZ G
+   JEZ E
+L: ADD DOWN
+   MOV  1 DOWN
+   JMP B
+G: SUB 42
+E: MOV  0 LAST
+
+@6
+
+
+@7
+
+
+@8
+MOV 100 RIGHT
+MOV  71 RIGHT
+MOV  42 RIGHT
+MOV  13 RIGHT
+MOV   9 RIGHT#
+MOV  14 RIGHT#
+MOV  25 RIGHT
+MOV  18 RIGHT#
+MOV  50 RIGHT
+MOV  22 RIGHT#
+MOV  75 RIGHT
+MOV 100 RIGHT
+
+@9
+   MOV ACC DOWN
+   MOV UP  DOWN
+   SWP
+N: MOV LEFT ACC
+2: SUB 25
+   MOV  2 ANY
+   JGZ 2
+   JEZ Z
+3: MOV  3 DOWN
+   ADD 2
+   JLZ 3
+   JNZ N
+Z: SWP
+   ADD UP
+   MOV -1 DOWN
+
+@10

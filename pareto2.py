@@ -4,8 +4,8 @@ from itertools import combinations as combs
 import sqlite3
 
 order = 'GCAITLN'
-fmap = {'G':0,'C':1,'A':2,'I':3,'T':4}
-bmap = {0:'G',1:'C',2:'A',3:'I',4:'T'}
+fmap = {'G':0,'C':1,'A':2,'I':3,'T':4,'L':5}
+bmap = {0:'G',1:'C',2:'A',3:'I',4:'T',5:'L'}
 
 def pareto_iter(labels):
     for i in range(len(labels)+1):
@@ -85,19 +85,31 @@ def categorize(metrics,fmap=fmap,bmap=bmap):
     return out
 
 if __name__ == '__main__':
+    import webbrowser
     con = sqlite3.connect(r'leaderboard.db')
     db = pd.read_sql('SELECT * FROM test',con,index_col='index')
-    db = db.loc[db.PUZZLE=='STABILIZED_WATER']
+    db = db.loc[db.PUZZLE=='ALCOHOL_SEPARATION']
+    print(db.shape)
     db = db.loc[db['OVERLAP']==0]
     # db = db.loc[db['TRACKLESS']==1]
     db['NTRACKLESS'] = 1-db['TRACKLESS']
-    db = db.loc[db['LOOPING']==1]
-    # db['NLOOPING'] = 1-db['LOOPING']
-    m = ['COST','CYCLES','AREA','INSTRUCTIONS','NTRACKLESS']
+    # db = db.loc[db['LOOPING']==1]
+    db['NLOOPING'] = 1-db['LOOPING']
+    m = ['COST','CYCLES','WIDTH','INSTRUCTIONS','NTRACKLESS','NLOOPING']
+    db = db[is_pareto(db[m])]
     df = db[m]
-    db = db[is_pareto(df)]
-    df = df[is_pareto(df)]
-    df.columns = list('GCAIT')
+    df.columns = list('GCAITL')
 
     fr = find_frontiers(df,formatted=False)
     cats = fr.apply(categorize)
+    db['CATEGORIES'] = cats
+    db_lite = db[m+['CATEGORIES','IMAGE']]
+    db_lite = db_lite.loc[db.CYCLES==29].loc[db.RATE==4]
+    for i in db_lite['CATEGORIES']:
+        print(i)
+        print()
+    # for i in db_lite.IMAGE:
+    #     webbrowser.open(i)
+        
+        
+        
