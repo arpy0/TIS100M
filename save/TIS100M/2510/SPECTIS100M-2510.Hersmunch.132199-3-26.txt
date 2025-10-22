@@ -1,0 +1,35 @@
+##Hersmunch 132199/3/26
+@0
+   JNZ J
+   MOV 1 ACC
+   MOV UP DOWN
+J: MOV ACC DOWN
+   MOV ACC DOWN
+   JRO DOWN
+   ADD 1
+
+@1
+
+
+@2
+S: MOV ANY ACC
+   MOV ACC LEFT
+   SUB UP
+   SUB UP
+   JLZ L
+   JMP E
+G: SUB UP
+E: MOV -1 UP
+   JGZ G
+   MOV UP UP
+   JLZ S
+   MOV -1 DOWN
+   JMP S
+L: MOV LEFT DOWN
+   MOV -4 UP
+
+@3
+MOV 0 ACC
+ADD 1
+JRO UP
+MOV ACC DOWN

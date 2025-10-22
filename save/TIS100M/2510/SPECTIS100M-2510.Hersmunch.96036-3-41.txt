@@ -1,0 +1,52 @@
+##Hersmunch 96036/3/41
+@0
+   SAV
+   ADD ACC
+   MOV ACC LAST
+   SWP
+   MOV ACC LAST
+   JNZ J
+
+   MOV UP ANY
+   MOV  2 ACC
+   MOV  4 DOWN
+
+   MOV ACC DOWN
+J: JRO DOWN
+   ADD 1
+
+@1
+
+
+@2
+S: MOV ANY ACC
+   MOV ACC LEFT
+   SUB UP
+   JGZ G
+   MOV ACC  DOWN
+   MOV UP NIL
+   MOV LEFT DOWN
+   MOV -4 UP
+   JMP S
+G: SUB UP
+   MOV -1 UP
+   JGZ G
+   MOV UP UP
+   JLZ S
+   MOV  0 DOWN
+
+@3
+S: MOV 2 ACC
+   JMP E
+Z: SWP
+   ADD 1
+E: SAV
+L: MOV UP ACC
+   JEZ Z
+   JLZ L
+   SUB 1
+   JNZ N
+   MOV 1 DOWN
+   JMP S
+N: SWP
+   MOV ACC DOWN

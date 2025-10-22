@@ -1,0 +1,41 @@
+##mr_puzzel 225626/3/30
+@0
+MOV UP ACC
+MOV ACC DOWN
+JMP OO
+
+-2: SUB 1
+-1: MOV ACC DOWN
+OO: JRO DOWN
+
+@1
+##BORING SIMPL WAY
+
+@2
+     MOV UP ACC
+     SAV
+SWP: SWP
+     SAV
+DIV: MOV -1 UP
+     SUB UP
+     JGZ DIV
+MOV ACC DOWN
+MOV -2 UP
+MOV UP ACC
+JGZ SWP
+MOV -99 UP
+MOV 999 DOWN
+
+@3
+MOV 0 ACC
+SAV
+*: MOV UP ACC
+   JGZ >
+   JLZ *
++: SWP
+   ADD 1
+   SWP
+   JMP *
+>: SWP
+   MOV ACC DOWN
+#

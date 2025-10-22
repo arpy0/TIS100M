@@ -62,7 +62,7 @@ if run:
         if sol.name[-3:] == 'zip': 
             sol.unlink()
             continue
-        cmd = subprocess.run(f'TIS-100-CXX -L {puzz} {sol} --seeds 1..10k -j 2 --stats',capture_output=True)
+        cmd = subprocess.run(f'TIS-100-CXX -L {puzz} {sol} -j 0 --seeds 1..10k --stats',capture_output=True)
         out = cmd.stdout.decode('utf-8')
         error = cmd.stderr.decode('utf-8')
         if error: 
@@ -123,7 +123,7 @@ for N in ['N','P']:
     pareto_cols = ['C',f'{N}','I']
 
     scores_df[f'pareto{N}'] = pareto.check_pareto(scores_df[pareto_cols+['O']])
-    scores_df[f'cats{N}'] = pareto.find_flagged_categories(scores_df[pareto_cols],scores_df['O'],{'':0,'c':1,'h':2})
+    scores_df[f'cats{N}'] = pareto.find_categories(scores_df[pareto_cols])
     scores_df[f'Records ({N})'] = ''
     scores_df.loc[scores_df[f'pareto{N}'],f'Records ({N})'] = \
         scores_df.loc[scores_df[f'pareto{N}'],f'cats{N}'].str.split(',').apply(lambda x: ','.join([i for i in x if '(' not in i]))

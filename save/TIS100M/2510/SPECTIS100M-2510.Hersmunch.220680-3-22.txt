@@ -1,0 +1,31 @@
+##Hersmunch 220680/3/22
+@0
+MOV UP ACC
+JRO 2
+SUB 1
+MOV ACC DOWN
+JRO DOWN
+NOP
+
+@1
+
+
+@2
+S: MOV ANY ACC
+   MOV ACC LEFT
+G: MOV -1 UP
+   SUB UP
+   JGZ G
+   MOV -2 UP
+   JLZ L
+   SWP
+   ADD 1
+   SWP
+L: MOV UP ACC
+   JNZ S
+Z: MOV LEFT UP
+   SWP
+   MOV ACC DOWN
+
+@3
+MOV UP DOWN
