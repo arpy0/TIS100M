@@ -1,0 +1,63 @@
+##Hersmunch 110/6/34
+@0
+MOV UP RIGHT
+
+@1
+MOV LEFT DOWN
+
+@2
+
+
+@3
+
+
+@4
+   MOV UP  RIGHT
+   SUB UP
+   MOV ACC RIGHT
+   MOV ACC RIGHT
+   ADD UP
+   JMP E
+
+N: MOV -1 DOWN
+E: JGZ G
+L: ADD 16
+G: SUB RIGHT
+   JNZ N
+Z: MOV  1 DOWN
+
+@5
+   ADD LEFT
+   SAV
+   NEG
+   SUB LEFT
+   MOV LEFT DOWN
+   JGZ G
+   ADD 16
+
+   MOV ACC ANY
+   SWP
+G: JRO -2
+
+@6
+
+
+@7
+
+
+@8
+ADD 1
+JRO UP
+
+MOV 516 RIGHT
+MOV ACC DOWN
+
+@9
+   MOV 500 ACC
+G: SUB ANY
+   JGZ G
+
+L: ADD 16
+   JLZ L
+
+O: MOV ACC DOWN

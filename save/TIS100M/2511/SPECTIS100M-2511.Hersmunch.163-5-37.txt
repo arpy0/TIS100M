@@ -1,0 +1,67 @@
+##Hersmunch 163/5/37
+@0
+MOV UP DOWN
+
+@1
+
+
+@2
+
+
+@3
+   MOV UP  RIGHT
+   SUB UP
+   MOV ACC RIGHT
+   MOV ACC RIGHT
+   ADD UP
+   JMP E
+
+N: MOV -2 RIGHT
+   MOV  0 RIGHT
+E: JGZ G
+L: ADD 16
+G: SUB RIGHT
+   JNZ N
+Z: MOV  1 RIGHT
+
+@4
+   ADD LEFT
+   SAV
+   NEG
+   SUB LEFT
+   MOV LEFT DOWN
+   JGZ G
+   ADD 16
+
+L: MOV ACC ANY
+   SWP
+   MOV LEFT DOWN
+G: JMP L
+
+@5
+
+
+@6
+
+
+@7
+
+
+@8
+MOV UP RIGHT
+ADD 1
+JRO UP
+MOV UP RIGHT
+
+MOV 516 RIGHT
+MOV ACC DOWN
+
+@9
+   MOV 500 ACC
+G: SUB LEFT
+   JGZ G
+
+L: ADD 16
+   JLZ L
+
+O: MOV ACC DOWN

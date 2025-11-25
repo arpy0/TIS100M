@@ -1,0 +1,86 @@
+##Untellect 182/5/33
+@0
+INIT: MOV ANY ACC
+      MOV ACC LEFT
+      SUB UP
+/:    JGZ -
++:    ADD 16
+-:    SWP
+JEZ INIT
+   MOV ACC LEFT
+   SWP
+   SUB LEFT
+   MOV +1 RIGHT
+JNZ /
+   MOV 99 RIGHT
+A: MOV UP RIGHT
+   JMP A
+
+@1
+MOV LEFT DOWN
+
+# FIRST 3: X,Y,Z
+#Y   = M X + C
+#Z   = M Y + C
+#Y-Z = M(X - Y)
+
+#M=(Y-Z)/(X-Y)
+# =(Y-Z+X-X)/(X-Y)
+# =(X-Z)/(X-Y)-1
+
+@2
+## 182/5/33/2P/C
+
+# WHAT A GREAT
+# FIRST NODE.
+
+# IT DOES THE
+# FIRST DIVISION
+# ALMOST ALL BY
+# ITSELF AND HAS
+# TWO INSTRUCTIONS
+# LEFT OVER TO
+# PASS THE REST
+# THROUGH...
+
+@3
+
+
+@4
+MOV UP DOWN
+
+@5
+
+
+@6
+
+
+@7
+
+
+@8
+   SUB 100
++: ADD UP
+   JLZ +
+MOV ACC DOWN
+SWP
+?: MOV ANY ACC
+   SUB 2
+   JNZ ?
+2: SWP
+   ADD ACC
+   NEG
+   ADD UP
+%: ADD 16
+   JLZ %
+C: MOV ACC RIGHT
+
+@9
+MOV LEFT DOWN
+
+# FIND X=2
+# Y=NEXT
+
+# Y = MX + C
+#   = 2M + C
+# C = Y - 2M

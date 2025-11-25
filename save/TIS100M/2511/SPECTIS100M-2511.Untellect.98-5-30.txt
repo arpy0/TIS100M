@@ -1,0 +1,62 @@
+##Untellect 98/5/30
+@0
+MOV ACC DOWN
+MOV UP ACC
+MOV ACC DOWN
+
+@1
+
+
+@2
+## 98/5/30/C
+
+@3
+MOV UP ACC
+SUB UP
+MOV ACC DOWN
+
+@4
+
+
+@5
+
+
+@6
+
+
+@7
+   SUB 2
+2: SUB UP # IN.A-2
+   JNZ 2
+   ADD 2
+O: SUB UP # POST 2
+   MOV ACC RIGHT
+M: MOV 1 ACC
+   ADD UP
+   JEZ O
+   SUB 2
+   JNZ M
+   MOV UP RIGHT
+
+@8
+MOV LEFT RIGHT
+MOV LEFT ACC
+
+JGZ %
+ADD 16
+%:
+
+MOV ACC DOWN
+ADD ACC
+MOV ACC RIGHT
+
+@9
+# Y = MX + C
+# C = Y - MX
+MOV LEFT ACC #Y
+SUB LEFT     #Y-2M
+
+%: ADD 16
+   JLZ %
+
+MOV ACC DOWN

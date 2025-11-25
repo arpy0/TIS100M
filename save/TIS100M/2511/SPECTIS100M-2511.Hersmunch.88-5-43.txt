@@ -1,0 +1,69 @@
+##Hersmunch 88/5/43
+@0
+   MOV UP  DOWN
+   SUB UP
+   MOV ACC DOWN
+   MOV ACC DOWN
+   ADD UP
+   JGZ G
+   ADD 16
+G: MOV ACC DOWN
+
+@1
+
+
+@2
+
+
+@3
+   SUB UP
+   MOV ACC RIGHT
+   MOV UP  RIGHT
+   SUB UP
+   JGZ G
+   ADD 16
+G: MOV UP  RIGHT
+   MOV ACC RIGHT
+   JRO -1
+
+@4
+   MOV LEFT DOWN
+   MOV LEFT DOWN
+   MOV LEFT ACC
+   SUB LEFT
+N: MOV -4 DOWN
+   JGZ G
+   ADD 16
+G: SUB LEFT
+   JNZ N
+   MOV  1 DOWN
+
+@5
+
+
+@6
+
+
+@7
+
+
+@8
+SUB UP
+SWP
+MOV UP  RIGHT
+SWP
+MOV ACC RIGHT
+SWP
+ADD 1
+JRO UP
+MOV 516 RIGHT
+MOV ACC DOWN
+
+@9
+   MOV 500 ACC
+G: SUB LEFT
+   JGZ G
+
+L: ADD 16
+   JLZ L
+O: MOV ACC DOWN

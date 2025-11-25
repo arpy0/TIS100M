@@ -1,0 +1,88 @@
+##Untellect 82/5/42
+@0
+MOV   UP ACC  # X
+MOV  ACC DOWN # X
+MOV   UP DOWN # Y
+SUB DOWN      # Y
+MOV   UP DOWN # Z
+JGZ L
+ADD 16
+# (X-Y)%16
+L: MOV ACC DOWN
+   JMP L
+
+@1
+
+
+@2
+## CLEAN 82/5/42
+# FIRST 3: X,Y,Z
+#Y   = M X + C
+#Z   = M Y + C
+#Y-Z = M(X - Y)
+
+#M=(Y-Z)/(X-Y)
+# = ODD
+# THEREFORE
+# (X-Z)/(X-Y)=EVEN
+
+# Y = MX + C
+# C = Y - MX
+
+@3
+MOV  UP DOWN # X
+MOV  UP ACC  # Y
+MOV ACC UP   # Y
+MOV ACC DOWN # Y
+SUB  UP      # Z
+   JGZ -
+# ACC = (Y-Z)%16
++: ADD 16
+-: MOV -2 DOWN
+   SUB UP
+   JLZ +
+   JGZ -
+   MOV +1 DOWN
+
+@4
+
+
+@5
+
+
+@6
+
+
+@7
+MOV UP ACC   # X
+MOV UP RIGHT # Y
+MOV UP NIL
+   MOV ACC RIGHT
+   MOV  +1 RIGHT
+Q: JRO  UP
+   MOV 999 RIGHT
+   MOV 999 RIGHT
+
+@8
+MOV LEFT RIGHT # Y
+
+SUB 999
++: # C += X
+   MOV LEFT RIGHT
+   # M += 1
+   ADD LEFT
+   JLZ +
+
+MOV ACC DOWN   # M
+
+@9
+ADD 983
+ADD LEFT     # Y
+# ACC = Y-16+999
+-: SUB LEFT  #  X
+   JGZ -     # *M
+# ACC = Y-MX-16
+# IN CASE Y>MX
++: ADD 16    # %16
+   JLZ +
+MOV ACC DOWN # =C

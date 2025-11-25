@@ -1,0 +1,38 @@
+##Hersmunch 11/5/13
+@0
+MOV UP DOWN
+
+@1
+
+
+@2
+
+
+@3
+MOV  5 LAST
+MOV UP NIL
+JRO UP
+MOV 11 DOWN
+MOV  3 DOWN
+MOV 13 DOWN
+MOV 11 DOWN
+MOV 13 ANY
+
+@4
+
+
+@5
+
+
+@6
+
+
+@7
+MOV UP RIGHT
+
+@8
+MOV LEFT RIGHT
+MOV LEFT DOWN
+
+@9
+MOV LEFT DOWN

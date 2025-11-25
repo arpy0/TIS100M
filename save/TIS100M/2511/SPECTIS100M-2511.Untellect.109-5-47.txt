@@ -1,0 +1,93 @@
+##Untellect 109/5/47
+@0
+SUB  UP       # -X
+MOV ACC DOWN  # -X
+SAV           # -X
+ ADD UP       #Y-X
+ MOV ACC DOWN #Y-X
+SWP           # -X
+ ADD UP       #Z-X
+ MOV ACC DOWN #Z-X
+SWP           #Y-X
+     SUB 16   # <0
+ 2X: ADD ACC
+%16: ADD 16
+     JLZ %16
+L: MOV ACC DOWN
+   JMP L
+
+@1
+# FIRST NODE
+# REPEATS 2(X-Y)
+
+# SECOND NODE:
+# M=(X-Z)/(X-Y)-1
+
+# THIRD NODE:
+# C = Y - MX
+
+@2
+## 109/5/47/3P
+# FIRST 3: X,Y,Z
+#Y   = M X + C
+#Z   = M Y + C
+#Y-Z = M(X - Y)
+
+#M=(Y-Z)/(X-Y)
+# =(Y-Z+X-X)/(X-Y)
+# =(X-Z)/(X-Y)-1
+# IN {3,5,11,13}
+# THEREFORE
+# (X-Z)/(X-Y)=EVEN
+
+# Y = MX + C
+# C = Y - MX
+
+@3
+MOV UP DOWN # X
+MOV UP DOWN # Y-X
+MOV UP ACC  # Z-X
+   JGZ /
++: ADD 16
+/: SWP
+    ADD 2   # M+=2
+   SWP
+   SUB UP
+?: JLZ +
+   JGZ /
+   SWP
+   SUB 1    # M-=1
+M: MOV ACC DOWN
+   JMP M
+
+@4
+
+
+@5
+
+
+@6
+
+
+@7
+MOV UP RIGHT
+
+@8
+SUB LEFT # X|
+SAV      # X|X
+ADD LEFT # Y|X
+*: SWP
+   JEZ Z
+   SUB 1   # X--
+   SWP
+   SUB LEFT# C-=M
+   JMP *
+Z: SWP
+   JGZ C # BUT <16
+%: ADD 16
+   JLZ %
+C: MOV  ACC RIGHT
+M: MOV LEFT DOWN
+
+@9
+MOV LEFT DOWN

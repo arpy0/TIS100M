@@ -1,0 +1,98 @@
+##Untellect 54/5/48
+@0
+MOV  UP ACC  # X
+MOV ACC DOWN # X
+SUB  UP      # Y
+MOV ACC DOWN # X-Y
+MOV  UP DOWN # Z
+# ACC = X-Y
+ 2X: ADD ACC
+     JLZ %16 #-3C
+     SUB 16  # %
+     JGZ L
+%16: ADD 16
+     JLZ %16
+# ACC = 2(X-Y) %16
+L: MOV ACC DOWN
+   JMP L
+
+@1
+
+
+@2
+## CLEAN 54/5/48
+# FIRST 3: X,Y,Z
+#Y   = M X + C
+#Z   = M Y + C
+#Y-Z = M(X - Y)
+
+#M=(Y-Z)/(X-Y)
+# =(Y-Z+X-X)/(X-Y)
+# =(X-Z)/(X-Y)-1
+# IN {3,5,11,13}
+# THEREFORE
+# (X-Z)/(X-Y)=EVEN
+
+# Y = MX + C
+# C = Y - MX
+
+@3
+MOV  UP ACC  # X
+MOV ACC DOWN # X
+MOV  UP DOWN # X-Y
+SUB  UP      # Z
+   JGZ /
+# ACC = (X-Z) %16
++: ADD 16
+/: MOV -2 DOWN
+   SUB UP
+?: JLZ +
+   JGZ /
+E: MOV +1 DOWN
+
+@4
+
+
+@5
+
+
+@6
+
+
+@7
+MOV UP ACC   #X
+MOV UP RIGHT #X-Y
+ADD ACC      #2X
+MOV UP NIL
+MOV UP NIL
+   # C += 2 X
+   MOV ACC RIGHT
+   # M += 2
+   MOV  +2 RIGHT
+Q: JRO  UP
+   MOV 900 RIGHT
+   MOV 999 RIGHT
+
+@8
+MOV LEFT RIGHT
+
+SUB 998
++: MOV LEFT RIGHT
+   ADD LEFT
+   JLZ +
+
+MOV ACC DOWN # M
+# MAKE THE C-LOOP
+# END WHEN Y>MX
+MOV +16 RIGHT
+
+@9
+ADD 900
+SUB LEFT     # X-Y
+# ACC = Y-X+900
+-: SUB LEFT  # X
+   JGZ -     #*M-1
+# ACC = Y-MX
++: ADD 16    # %16
+   JLZ +
+MOV ACC DOWN # =C
