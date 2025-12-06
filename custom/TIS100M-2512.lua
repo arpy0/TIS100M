@@ -64,8 +64,12 @@ function get_streams()
 		
 		-- When very close to a power of two, this ensures that at least some of the time, it approaches that power by a smaller number, to ensure that even lower bits are tracked accurately by the solution
 		if trunc(last_log) > 0.8 and math.random() < 0.5 then
-			lb = math.floor((2^math.ceil(math.log(total,2))-total)*0.8)-10
-			ub = math.ceil((2^math.ceil(math.log(total,2))-total)*1.2)+10
+			delta = 2^math.ceil(math.log(total,2))-total
+			lb = math.floor((delta)*0.8)-10
+			ub = math.ceil((delta)*1.2)+10
+			if lb > upperbound then
+				lb = upperbound - 20
+			end
 			if lb < 0 then
 				lb = 0
 			end
@@ -73,14 +77,17 @@ function get_streams()
 				ub = upperbound
 			end
 			input[i] = math.random(lb, ub)
-			-- print("R(" .. lb .. ", " .. ub ..")!!", "-> " .. input[i], 2^math.ceil(math.log(total,2))-total)
-		-- when the total is already large, the distribution changes to favor larger numbers, which gives a roughly 18% chance to exceed 2^14 (but never in a fixed test)
+			--print("R(" .. lb .. ", " .. ub ..")!!", "-> " .. input[i], delta)
+		-- when the total is already large, the distribution changes to favor larger numbers, which gives a roughly 15% chance to exceed 2^14 (but never in a fixed test)
 		elseif total > 1600 and math.random() < 0.5 then
 			input[i] = math.random(750,999)
 			-- print("R(750, 999)!", "-> " .. input[i])
 		else
 			input[i] = math.random(0, math.floor(upperbound))
 			-- print("R(0, "..math.floor(upperbound)..")", "-> " .. input[i])
+		end
+		if input[i] > 999 then
+			print("oof ", input[i])
 		end
 		-- numbers steadily increase over the test, ensuring that the first few powers aren't completely skipped over
 		upperbound = 10 + (989/39)*i
