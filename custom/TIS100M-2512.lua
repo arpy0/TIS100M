@@ -62,8 +62,10 @@ function get_streams()
 		-- print(math.floor(upperbound))
 		-- special[i] = 1000*trunc(last_log)
 		
+		if i == 1 then
+			input[i] = math.random(1, 10)
 		-- When very close to a power of two, this ensures that at least some of the time, it approaches that power by a smaller number, to ensure that even lower bits are tracked accurately by the solution
-		if trunc(last_log) > 0.8 and math.random() < 0.5 then
+		elseif trunc(last_log) > 0.8 and math.random() < 0.5 then
 			delta = 2^math.ceil(math.log(total,2))-total
 			lb = math.floor((delta)*0.8)-10
 			ub = math.ceil((delta)*1.2)+10
