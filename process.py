@@ -7,7 +7,7 @@ from zipfile import ZipFile
 import pareto
 
 # The only input is the month!
-month = '2511'
+month = '2512'
 filename = f'TIS100M-{month}'
 
 run = True
@@ -62,7 +62,7 @@ if run:
         if sol.name[-3:] == 'zip': 
             sol.unlink()
             continue
-        cmd = subprocess.run(f'TIS-100-CXX -L {puzz} {sol} -j 0 --seeds 1..10k --limit 1M',capture_output=True)
+        cmd = subprocess.run(f'TIS-100-CXX -L {puzz} {sol} -j 0 --seeds 1..100k --limit 1M --stats',capture_output=True)
         out = cmd.stdout.decode('utf-8')
         error = cmd.stderr.decode('utf-8')
         if error: 

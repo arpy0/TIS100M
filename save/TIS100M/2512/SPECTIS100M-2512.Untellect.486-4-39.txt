@@ -1,0 +1,67 @@
+##Untellect 486/4/39
+@0
+## 4 NODES
+
+@1
+   ADD UP
+   JLZ +
+   JEZ +
+-: MOV +1 RIGHT
+   SUB RIGHT
+   JGZ -
++: MOV -1 RIGHT
+
+@2
+    ADD 1
+1O:  MOV   -1 LAST
+1?: JRO  LEFT
+1+:  MOV  ACC LEFT
+     MOV   +1 ANY
+      SUB  256
+      JEZ   2?
+      ADD  256
+     ADD  ACC
+    JMP    1?
+2O:  MOV   -1 DOWN
+2?: JRO  LEFT
+2+:  MOV  512 LEFT
+     MOV   +3 DOWN
+    JMP   2?
+
+@3
+
+
+@4
+
+
+@5
+
+
+@6
+    JMP ?
+     MOV   +1 DOWN
+ ?: JRO   UP
+ +:  MOV   -1 DOWN
+    JMP ?
+++:  SUB 2
+    JGZ ?
+     MOV -1 DOWN
+     SWP
+     ADD ACC
+     ADD 1
+     SAV
+
+@7
+
+
+@8
+
+
+@9
+   SUB 2
++:  ADD 1
+?: JRO ANY
+O:  MOV ACC DOWN
+   JMP ?
+
+@10

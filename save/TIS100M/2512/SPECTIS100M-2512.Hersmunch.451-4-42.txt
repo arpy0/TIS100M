@@ -1,0 +1,80 @@
+##Hersmunch 451/4/42
+@0
+
+
+@1
+   ADD UP
+   JGZ G
+   JMP L
+
+G: MOV -6 DOWN
+   SUB 509
+   SUB DOWN
+   JGZ G
+
+L: MOV  1 DOWN
+
+@2
+
+
+@3
+
+
+@4
+
+
+@5
+   MOV -508 ACC
+   MOV UP NIL
+
+E: MOV ACC UP
+Z: MOV ACC RIGHT
+   JGZ J
+   ADD 509
+   ADD ACC
+   SUB 509
+J: JRO ANY
+
+O: MOV  1 RIGHT
+   JMP J
+
+@6
+   MOV -1 DOWN
+   JMP J
+
+L: ADD 1
+   JMP J
+Z: ADD 1
+   ADD DOWN
+J: JRO LEFT
+
+   MOV  1 DOWN
+   JMP J
+
+   JLZ L
+G: MOV -5 DOWN
+   JMP Z
+
+@7
+
+
+@8
+
+
+@9
+   MOV UP ACC
+   SAV
+   JMP J
+
+   SWP
+   MOV ACC UP
+   ADD ACC
+   SWP
+
+   ADD 1
+J: JRO UP
+
+   MOV ACC DOWN
+   JMP J
+
+@10

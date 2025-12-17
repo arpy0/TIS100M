@@ -1,0 +1,68 @@
+##Hersmunch 4211/6/33
+@0
+MOV   1 RIGHT
+MOV   2 RIGHT
+MOV   4 RIGHT
+MOV   8 RIGHT
+MOV  16 RIGHT
+JRO -1
+
+@1
+   ADD UP
+   JGZ G
+   JMP L
+
+G: MOV  3 DOWN
+   SUB LEFT
+   JGZ G
+
+L: MOV  1 ANY
+
+@2
+
+
+@3
+
+
+@4
+
+
+@5
+MOV UP LAST
+MOV UP ANY
+
+@6
+   SUB RIGHT
+
+L: JRO LEFT
+   MOV 3 DOWN
+   JMP L
+
+   ADD 1
+   JLZ L
+   MOV 1 DOWN
+
+@7
+   MOV 1 LEFT
+
+   SUB 7
+   JLZ L
+
+   ADD ACC
+   MOV ACC LEFT
+   JRO -2
+
+L: ADD 9
+
+@8
+
+
+@9
+J: JRO UP
+
+   ADD 1
+   JMP J
+
+   MOV ACC DOWN
+
+@10
