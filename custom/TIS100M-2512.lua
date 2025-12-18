@@ -54,7 +54,7 @@ function get_streams()
 	output = {}
 	--totals = {}
 	--bounds = {}
-    total = 0
+	total = 0
 	upperbound = 10
 	last_log = 0
 	--special = {}
@@ -95,7 +95,7 @@ function get_streams()
 		upperbound = 10 + (989/39)*i
 		total = total + input[i]
 		last_log = math.log(total+0.5, 2)
-	    output[i] = math.floor(last_log)
+		output[i] = math.floor(last_log)
 		-- print(total, last_log, trunc(last_log))
 	end
 	-- print(total)
