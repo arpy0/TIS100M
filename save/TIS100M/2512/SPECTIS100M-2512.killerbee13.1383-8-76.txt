@@ -1,4 +1,4 @@
-##killerbee13 1387/8/76
+##killerbee13 1383/8/76
 @0
   MOV 1 ACC
   SWP

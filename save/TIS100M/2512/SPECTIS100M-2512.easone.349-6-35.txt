@@ -1,4 +1,4 @@
-##easone 351/6/35
+##easone 349/6/35
 @0
 SUB RIGHT
 A: MOV 0 RIGHT

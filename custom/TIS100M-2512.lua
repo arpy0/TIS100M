@@ -50,16 +50,6 @@ function trunc(x)
 end
 
 function get_streams()
-	math.random()
-	math.random()
-	math.random()
-	math.random()
-	math.random()
-	math.random()
-	math.random()
-	math.random()
-	math.random()
-	math.random()
 	input = {}
 	output = {}
 	--totals = {}
@@ -104,8 +94,8 @@ function get_streams()
 		-- numbers steadily increase over the test, ensuring that the first few powers aren't completely skipped over
 		upperbound = 10 + (989/39)*i
 		total = total + input[i]
-	    _, e = math.frexp(total)
-	    output[i] = e - 1
+		last_log = math.log(total+0.5, 2)
+	    output[i] = math.floor(last_log)
 		-- print(total, last_log, trunc(last_log))
 	end
 	-- print(total)

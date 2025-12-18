@@ -1,6 +1,6 @@
-##easone 278/6/44
+##easone 290/6/43
 @0
-#276/6/44
+#290/6/43
 
 @1
 MOV -2 ACC
@@ -45,7 +45,7 @@ B: JRO UP
 OVB: MOV -4 UP #B
 ADD 1
 
-OUT: MOV DOWN NIL
+OUT: MOV 1 DOWN
 
 @6
 MOV -17 ACC
@@ -63,8 +63,7 @@ JMP B
 
 
 @8
-MOV 0 UP
-MOV 1 RIGHT
+MOV UP RIGHT
 
 @9
 JMP A

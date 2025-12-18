@@ -1,4 +1,4 @@
-##Hersmunch 4211/6/33
+##Hersmunch 4195/6/33
 @0
 MOV   1 RIGHT
 MOV   2 RIGHT
