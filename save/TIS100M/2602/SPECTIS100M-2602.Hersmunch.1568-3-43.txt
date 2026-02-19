@@ -1,0 +1,67 @@
+##Hersmunch 1568/3/43
+@0
+   SUB 1
+   MOV UP DOWN!
+   ADD UP
+   SWP
+E: ADD DOWN
+   JLZ L
+G: SWP
+   MOV ACC LEFT
+   SWP
+   SUB LEFT
+   MOV -3 DOWN
+   JGZ G
+   JEZ G
+L: MOV -8 DOWN
+   JMP E
+
+@1
+
+
+@2
+
+
+@3
+
+
+@4
+   MOV UP ACC
+   MOV ACC UP
+   MOV ACC DOWN
+   MOV UP NIL
+   JMP J
+
+   MOV ACC UP
+E: SWP
+   MOV ACC DOWN
+   MOV -1 ACC
+   JRO 2
+   SWP
+   ADD 1
+   SWP
+J: JRO UP
+
+@5
+
+
+@6
+
+
+@7
+   MOV UP ACC
+   SWP
+Z: MOV 0 DOWN
+   MOV LAST NIL
+S: ADD UP
+   MOV ACC DOWN
+   SWP
+   MOV ACC ANY
+   MOV ACC LEFT
+   SWP
+   SUB LEFT
+   JEZ Z
+N: ADD LEFT
+   JMP S
+
+@8

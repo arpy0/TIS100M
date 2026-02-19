@@ -1,0 +1,64 @@
+##Hersmunch 1832/3/36
+@0
+   MOV UP DOWN
+   MOV UP ACC
+   SUB 1
+   SWP
+   JMP E
+L: MOV -8 DOWN
+E: ADD DOWN
+   JLZ L
+G: SWP
+   MOV ACC LEFT
+   SWP
+   SUB LEFT
+   MOV -1 DOWN
+   JLZ L
+   JMP G
+
+@1
+
+
+@2
+
+
+@3
+
+
+@4
+   MOV UP ACC
+   MOV ACC UP
+   MOV UP NIL
+   JMP E
+
+   MOV ACC DOWN
+   SWP
+   MOV ACC DOWN
+   MOV ACC UP
+   MOV ACC DOWN
+E: SWP
+
+   MOV -1 ACC
+   ADD 1
+   JRO UP
+
+@5
+
+
+@6
+
+
+@7
+   MOV 0 DOWN
+   MOV LAST NIL
+   JMP S
+
+N: ADD UP
+S: ADD ANY
+
+   MOV ACC DOWN
+
+   SUB UP
+   JNZ N
+
+@8

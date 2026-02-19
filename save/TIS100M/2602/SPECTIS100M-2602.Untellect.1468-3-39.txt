@@ -1,0 +1,75 @@
+##Untellect 1468/3/39
+@0
+# P-1 / A QUERIES
+    ADD UP
+    MOV ACC DOWN
+    SWP
+    ADD UP
+    SUB 1
+    MOV ACC DOWN
+   JMP ?
+A:  SWP
+     MOV ACC DOWN
+    SWP
+?: JRO DOWN
+P:  MOV ACC DOWN
+   JMP ?
+
+@1
+
+
+@2
+
+
+@3
+## 1468/3P3/39
+
+# THE RESET CHECK
+# IN "OUT/A" NODE
+# SLOWLY FILLS THE
+# STACK: +1/PERIOD
+
+# AT MOST 39/3=13
+# STILL HAS 2
+# EXTRA SPACE
+
+@4
+# REMAINDER
+    ADD 1
+    MOV UP DOWN #A
+    SUB UP
+# INIT: -(P-2)
+   JMP L
+G:  MOV +1 ANY
+    MOV +1 ANY
+    SUB UP
+?: JGZ G
+L:  MOV -3 UP
+    MOV -8 DOWN
+    ADD UP
+   JMP ?
+
+@5
+
+
+@6
+
+
+@7
+# OUT / A
+   MOV UP ACC
+   SWP
+   JMP ?
+O:  MOV ACC DOWN
+    SWP
+     MOV ACC LEFT
+     MOV ACC LEFT
+    SWP
+    SUB LEFT
+   JEZ O
+    ADD LEFT
+?: JRO UP
+    ADD 1
+   JMP ?
+
+@8

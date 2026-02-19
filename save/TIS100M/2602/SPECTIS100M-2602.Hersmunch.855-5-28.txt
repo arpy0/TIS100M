@@ -1,0 +1,54 @@
+##Hersmunch 855/5/28
+@0
+   MOV UP LEFT!
+   MOV UP RIGHT
+   ADD 1
+   ADD LEFT
+   JMP E
+
+G: MOV -1 DOWN
+E: SUB RIGHT
+   JGZ G
+
+L: MOV 1 DOWN
+   ADD LEFT
+   JGZ G
+   JMP L
+
+@1
+MOV LEFT ACC
+SUB 1
+
+MOV ACC LEFT
+JRO -1
+
+@2
+
+
+@3
+MOV ANY ACC
+
+MOV ACC ANY
+MOV ACC DOWN
+
+@4
+   MOV -1 ACC
+   ADD 1
+   JRO UP
+
+   MOV ACC DOWN
+
+@5
+
+
+@6
+
+
+@7
+Z: MOV ACC DOWN
+   SUB LEFT
+   JEZ Z
+   ADD LEFT
+   ADD UP
+
+@8
